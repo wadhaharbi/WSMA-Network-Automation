@@ -45,8 +45,9 @@ By leveraging Ansible and SSH connectivity, network administrators can manage sw
 ##  Author
 
 Ameera Albalawi 
-Sara alshehri
+Sara Alshehri
 Madeeha Alotaibi
+Wadha Alharbi
 
 Advanced Networking Technology Bootcamp
 Tuwaiq Academy
