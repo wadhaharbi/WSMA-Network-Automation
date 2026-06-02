@@ -41,14 +41,6 @@ By leveraging Ansible and SSH connectivity, network administrators can manage sw
 - Activity Logging and Monitoring
 
 ---
-## 📸 Screenshots
-
-
-### VLAN Automation
-
-![VLAN](screenshots/vlans.png)
-
----
 
 ##  Author
 
