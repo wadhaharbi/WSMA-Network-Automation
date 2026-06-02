@@ -1,0 +1,12 @@
+---
+- name: Create VLAN
+  hosts: switches
+  gather_facts: no
+
+  tasks:
+
+    - name: Create VLAN 50
+      cisco.ios.ios_config:
+        lines:
+          - vlan 50
+          - name AUTOMATION_VLAN

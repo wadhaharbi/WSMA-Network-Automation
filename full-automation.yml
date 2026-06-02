@@ -1,0 +1,78 @@
+---
+- name: Full Switch Automation
+  hosts: switches
+  gather_facts: no
+
+  tasks:
+
+    - name: Create VLANs
+      tags: vlan
+      cisco.ios.ios_config:
+        lines:
+          - vlan 10
+          - name MANAGEMENT
+
+          - vlan 20
+          - name HR
+
+          - vlan 30
+          - name IT
+
+          - vlan 40
+          - name SALES
+
+          - vlan 50
+          - name SECURITY
+
+          - vlan 60
+          - name SERVERS
+
+          - vlan 70
+          - name VOICE
+
+          - vlan 80
+          - name WIFI
+
+          - vlan 90
+          - name CCTV
+
+          - vlan 100
+          - name GUEST
+
+    - name: Configure Port Security
+      tags: ports
+      cisco.ios.ios_config:
+        parents: interface range fa0/1-10
+        lines:
+          - switchport mode access
+          - switchport port-security
+          - switchport port-security maximum 2
+          - switchport port-security violation restrict
+          - switchport port-security mac-address sticky
+
+    - name: Shutdown Unused Ports
+      tags: ports
+      cisco.ios.ios_config:
+        parents: interface range fa0/11-24
+        lines:
+          - shutdown
+
+    - name: Enable DHCP Snooping
+      tags: security
+      cisco.ios.ios_config:
+        lines:
+          - ip dhcp snooping
+          - ip dhcp snooping vlan 10,20,30,40,50
+
+    - name: Enable BPDU Guard
+      tags: security
+      cisco.ios.ios_config:
+        parents: interface range fa0/1-10
+        lines:
+          - spanning-tree portfast
+          - spanning-tree bpduguard enable
+
+    - name: Backup Running Config
+      tags: backup
+      cisco.ios.ios_config:
+        backup: yes
